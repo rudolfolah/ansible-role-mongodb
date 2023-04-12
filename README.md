@@ -1,7 +1,7 @@
-Role Name
+Mongodb
 =========
 
-A brief description of the role goes here.
+Installs a specific version of Mongo from a .tar.gz.
 
 Requirements
 ------------
@@ -30,7 +30,7 @@ Including an example of how to use your role (for instance, with variables passe
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
