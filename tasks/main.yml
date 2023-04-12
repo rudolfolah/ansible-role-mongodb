@@ -1,0 +1,43 @@
+---
+- name: Copy configuration
+  tags: setup
+  ansible.builtin.copy:
+    src: mongod.conf
+    dest: /root/mongod.conf
+- name: Download dependencies
+  tags: setup
+  ansible.builtin.apt:
+    pkg:
+      - libcurl4
+      - openssl
+      - liblzma5
+- name: Download MongoDB
+  tags: setup
+  ansible.builtin.get_url:
+    url: https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu1804-6.0.5.tgz
+    dest: /root/mongodb-linux-x86_64-ubuntu1804-6.0.5.tgz
+- name: Unpack MongoDB
+  tags: setup
+  ansible.builtin.unarchive:
+    src: /root/mongodb-linux-x86_64-ubuntu1804-6.0.5.tgz
+    dest: /root/
+    remote_src: true
+- name: Copy MongoDB binaries to /usr/bin
+  tags: setup
+  ansible.builtin.copy:
+    src: /root/mongodb-linux-x86_64-ubuntu1804-6.0.5/bin/
+    dest: /usr/bin/
+    mode: 0755
+    remote_src: true
+- name: Create MongoDB data directory
+  tags: setup
+  ansible.builtin.file:
+    path: /data/db
+    state: directory
+    mode: 0755
+- name: Start MongoDB server
+  tags: [never, start]
+  ansible.builtin.command: mongod -f /root/mongod.conf --fork --logpath /var/log/mongodb.log
+- name: Stop MongoDB server
+  tags: [never, stop]
+  ansible.builtin.command: mongod --shutdown
