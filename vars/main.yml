@@ -1,2 +1,15 @@
 ---
-# vars file for mongodb
+mongodb_dependencies:
+  - libcurl4
+  - openssl
+  - liblzma5
+
+mongodb_download_url: https://fastdl.mongodb.org/linux/{{ mongodb_os }}/mongodb-linux-x86_64-{{ mongodb_os_version }}-{{ mongodb_version }}.tgz
+mongodb_download_dest: /root/mongodb-linux-x86_64-{{ mongodb_os_version }}-{{ mongodb_version }}.tgz
+
+mongodb_binaries_src: /root/mongodb-linux-x86_64-{{ mongodb_os_version }}-{{ mongodb_version }}/bin/*
+mongodb_binaries_dest: /usr/bin/
+
+mongodb_data_directory: /data/db
+
+mongodb_config_file: /root/mongod.conf

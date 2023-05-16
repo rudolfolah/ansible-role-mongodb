@@ -1,38 +1,55 @@
-Mongodb
-=========
+# Ansible Role: MongoDB
 
-Installs a specific version of Mongo from a .tar.gz.
+An Ansible role for installing and configuring MongoDB.
 
-Requirements
-------------
+## Requirements
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+This role requires Ansible 2.10 or later.
 
-Role Variables
---------------
+## Role Variables
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+The role uses the following variables, which can be customized in `vars/main.yml` or overridden during playbook execution:
 
-Dependencies
-------------
+- `mongodb_version`: The version of MongoDB to install (default: `6.0.5`).
+- `mongodb_os`: The target operating system for MongoDB (default: `ubuntu1804`).
+- `mongodb_os_version`: The specific version of the target operating system (default: `6.0.5`).
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+## Dependencies
 
-Example Playbook
-----------------
+This role has no external dependencies.
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+## Example Playbook
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+To use this role, create a playbook as shown below:
 
-License
--------
+```yaml
+- name: Install and configure MongoDB
+  hosts: servers
+  become: true
 
-MIT
+  roles:
+    - role: mongodb
+```
 
-Author Information
-------------------
+You can also override the default variables in the playbook:
 
-Rudolf Olah
+```yaml
+- name: Install and configure MongoDB
+  hosts: servers
+  become: true
+
+  roles:
+    - role: mongodb
+      vars:
+        mongodb_version: 4.4.5
+        mongodb_os: debian10
+        mongodb_os_version: 4.4.5
+```
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+## Author Information
+
+This role was created by Rudolf Olah

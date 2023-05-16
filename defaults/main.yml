@@ -1,2 +1,4 @@
 ---
-# defaults file for mongodb
+mongodb_version: 6.0.5
+mongodb_os: ubuntu1804
+mongodb_os_version: 6.0.5
